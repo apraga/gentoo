@@ -1,0 +1,52 @@
+diff --git a/Makefile b/Makefile
+index 5e9b4cc..c5e3d07 100644
+--- a/Makefile
++++ b/Makefile
+@@ -196,7 +196,7 @@ else ifeq ($(JULIA_BUILD_MODE),debug)
+ JL_PRIVATE_LIBS-0 += libjulia-internal-debug libjulia-codegen-debug
+ endif
+ ifeq ($(USE_GPL_LIBS), 1)
+-JL_PRIVATE_LIBS-$(USE_SYSTEM_LIBSUITESPARSE) += libamd libbtf libcamd libccolamd libcholmod libcolamd libklu libldl librbio libspqr libsuitesparseconfig libumfpack
++JL_PRIVATE_LIBS-$(USE_SYSTEM_LIBSUITESPARSE) += libamd libbtf libcamd libccolamd libcholmod libcolamd libklu libldl libspqr libsuitesparseconfig libumfpack
+ endif
+ JL_PRIVATE_LIBS-$(USE_SYSTEM_LIBBLASTRAMPOLINE) += libblastrampoline
+ JL_PRIVATE_LIBS-$(USE_SYSTEM_PCRE) += libpcre2-8
+diff --git a/deps/libsuitesparse.mk b/deps/libsuitesparse.mk
+index 4d5122e..f64c906 100644
+--- a/deps/libsuitesparse.mk
++++ b/deps/libsuitesparse.mk
+@@ -4,7 +4,7 @@ include $(SRCDIR)/libsuitesparse.version
+ ifneq ($(USE_BINARYBUILDER_LIBSUITESPARSE), 1)
+ 
+ LIBSUITESPARSE_PROJECTS := AMD BTF CAMD CCOLAMD COLAMD CHOLMOD LDL KLU UMFPACK RBio SPQR
+-LIBSUITESPARSE_LIBS := $(addsuffix .*$(SHLIB_EXT)*,suitesparseconfig amd btf camd ccolamd colamd cholmod klu ldl umfpack rbio spqr)
++LIBSUITESPARSE_LIBS := $(addsuffix .*$(SHLIB_EXT)*,suitesparseconfig amd btf camd ccolamd colamd cholmod klu ldl umfpack spqr)
+ 
+ LIBSUITESPARSE_CMAKE_FLAGS := $(CMAKE_COMMON) \
+ 	  -DCMAKE_BUILD_TYPE=Release \
+diff --git a/deps/libsuitesparse.mk b/deps/libsuitesparse.mk
+index f64c906..fc29c08 100644
+--- a/deps/libsuitesparse.mk
++++ b/deps/libsuitesparse.mk
+@@ -3,7 +3,7 @@ include $(SRCDIR)/libsuitesparse.version
+ 
+ ifneq ($(USE_BINARYBUILDER_LIBSUITESPARSE), 1)
+ 
+-LIBSUITESPARSE_PROJECTS := AMD BTF CAMD CCOLAMD COLAMD CHOLMOD LDL KLU UMFPACK RBio SPQR
++LIBSUITESPARSE_PROJECTS := AMD BTF CAMD CCOLAMD COLAMD CHOLMOD LDL KLU UMFPACK SPQR
+ LIBSUITESPARSE_LIBS := $(addsuffix .*$(SHLIB_EXT)*,suitesparseconfig amd btf camd ccolamd colamd cholmod klu ldl umfpack spqr)
+ 
+ LIBSUITESPARSE_CMAKE_FLAGS := $(CMAKE_COMMON) \
+diff --git a/stdlib/SuiteSparse_jll/src/SuiteSparse_jll.jl b/stdlib/SuiteSparse_jll/src/SuiteSparse_jll.jl
+index e5a4502..69fae00 100644
+--- a/stdlib/SuiteSparse_jll/src/SuiteSparse_jll.jl
++++ b/stdlib/SuiteSparse_jll/src/SuiteSparse_jll.jl
+@@ -8,7 +8,7 @@ Base.Experimental.@compiler_options compile=min optimize=0 infer=false
+ const PATH_list = String[]
+ const LIBPATH_list = String[]
+ 
+-export libamd, libbtf, libcamd, libccolamd, libcholmod, libcolamd, libklu, libldl, librbio, libspqr, libsuitesparseconfig, libumfpack
++export libamd, libbtf, libcamd, libccolamd, libcholmod, libcolamd, libklu, libldl, libspqr, libsuitesparseconfig, libumfpack
+ 
+ # These get calculated in __init__()
+ # Man I can't wait until these are automatically handled by an in-Base JLLWrappers clone.
