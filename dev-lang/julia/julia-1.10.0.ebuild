@@ -40,14 +40,18 @@ RDEPEND="
 	net-misc/curl[http2,ssh]
 	sci-libs/amd:0=
 	sci-libs/arpack:0=
+	sci-libs/btf:0=
 	sci-libs/camd:0=
 	sci-libs/ccolamd:0=
 	sci-libs/cholmod:0=
 	sci-libs/colamd:0=
 	sci-libs/fftw:3.0=[threads]
+	sci-libs/klu:0=
+	sci-libs/ldl:0=
 	sci-libs/openlibm:0=
 	sci-libs/openblas:0=
 	sci-libs/spqr:0=
+	sci-libs/suitesparseconfig:0=
 	sci-libs/umfpack:0=
 	sys-libs/zlib:0=
 	virtual/lapack
