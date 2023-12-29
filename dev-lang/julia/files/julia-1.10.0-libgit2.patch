@@ -7,7 +7,7 @@ index f8e814f..622a0c1 100644
      const libgit2 = "@rpath/libgit2.1.6.dylib"
  else
 -    const libgit2 = "libgit2.so.1.6"
-+    const libgit2 = "libgit2.so.1.7"
++    const libgit2 = "libgit2.so"
  end
  
  function __init__()
